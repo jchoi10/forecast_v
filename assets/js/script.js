@@ -18,7 +18,7 @@ $("#searchBtn").on("click",function(event) {
     if (!previousHistorylist.includes(currentCity)) {
         previousHistorylist.push(currentCity);
         var pastCity = $(
-            `<li>$(currentCity)</li>`
+            `<li>${currentCity}</li>`
         );
         $(".previousHistory").append(pastCity);
     };
