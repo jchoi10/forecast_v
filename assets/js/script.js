@@ -14,7 +14,7 @@ var previousHistorylist = [];
 $("#searchBtn").on("click",function(event) {
     event.preventDefault();
 
-    var currentCity = $("citySearch").val().trim();
+    var currentCity = $("#citySearch").val().trim();
     if (!previousHistorylist.includes(currentCity)) {
         previousHistorylist.push(currentCity);
         var pastCity = $(
@@ -22,5 +22,5 @@ $("#searchBtn").on("click",function(event) {
         );
         $("#previousHistory").append(pastCity);
     };
-    localStorage.setItem(currentCity,stringify(previousHistorylist));
+    localStorage.setItem(currentCity, JSON.stringify(previousHistorylist));
 })
