@@ -8,3 +8,19 @@ var previousHistorylist = [];
 
 // api call
 // api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+
+
+
+$("#searchBtn").on("click",function(event) {
+    event.preventDefault();
+
+    var currentCity = $("citySearch").val().trim();
+    if (!previousHistorylist.includes(currentCity)) {
+        previousHistorylist.push(currentCity);
+        var pastCity = $(
+            `<li>$(currentCity)</li>`
+        );
+        $("#previousHistory").append(pastCity);
+    };
+    localStorage.setItem(currentCity,stringify(previousHistorylist));
+})
