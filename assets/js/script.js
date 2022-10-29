@@ -20,7 +20,7 @@ $("#searchBtn").on("click",function(event) {
         var pastCity = $(
             `<li>$(currentCity)</li>`
         );
-        $("#previousHistory").append(pastCity);
+        $(".previousHistory").append(pastCity);
     };
     localStorage.setItem(currentCity, JSON.stringify(previousHistorylist));
 })
