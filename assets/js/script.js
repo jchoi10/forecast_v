@@ -6,10 +6,10 @@ var previousHistorylist = [];
 
 // https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
-var apiCall = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${APIkey}`;
-
 var getcurrentweatherDisplay = (event) => {
     var currentCity = $("#citySearch").val().trim();
+    var apiCall = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${APIkey}`;
+    
     fetch(apiCall)
     .then(function(){})
     .then((res) => {
