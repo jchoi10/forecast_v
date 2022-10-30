@@ -1,35 +1,63 @@
 var day = moment().format('MMMM Do YYYY, h:mm:ss a');
 $("#currentDay").append(day);
 
+const searchForm = document.querySelector("#citySearch");
 var APIkey = "c5983aad19183fb683432bc8f6baf7fc"
 var previousHistorylist = [];
+var apiCall = `https://api.openweathermap.org/data/2.5`;
+
+const displayWeather = (data) => {
+    const currentweatherContainer = document.createElement('div');
+    console.log(data);
+    currentweatherContainer.textContent = data.toString();
+    document.body.appendChild(currentweatherContainer);
+}
 
 // https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
-var getcurrentweatherDisplay = (event) => {
-    var currentCity = $("#citySearch").val().trim();
-    var apiCall = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${APIkey}`;
+var getcurrentweather = (city) => {
     
-    fetch(apiCall)
-    .then(function(){})
-    .then((res) => {
-        return res.JSON
+    
+    fetch(`${apiCall}/forecast?q=${city}&appid=${APIkey}`)
+    .then(function(res){
+        console.log(res)
+        if (!res.ok){
+            console.error("response not ok")
+        }
+        return res.json()
     })
+    .then((data) => {
+        return data
+    }).catch((err) => console.error(err))
+};
+
+
+// console.log(searchForm.children[0]);
+
+const handleSearchSubmit= (event) => {
+    event.preventDefault();
+    console.log(event.target);
+
+    getcurrentweather(searchForm.children[0].value);
 }
 
-console.log(getcurrentweatherDisplay)
+searchForm.addEventListener("click", handleSearchSubmit);
 
-$("#searchBtn").on("click",function(event) {
-    event.preventDefault();
 
-    var currentCity = $("#citySearch").val().trim();
+// console.log(getcurrentweather())
 
-    if (!previousHistorylist.includes(currentCity)) {
-        previousHistorylist.push(currentCity);
-        var pastCity = $(
-            `<li>${currentCity}</li>`
-        );
-        $(".previousHistory").append(pastCity);
-    };
-    localStorage.setItem(currentCity, JSON.stringify(previousHistorylist));
-})
+// $("#searchBtn").on("click",function(event) {
+//     console.log(event);
+//     event.preventDefault();
+    
+//     var currentCity = $("#citySearch").val().trim();
+//     console.log(currentCity);
+//     if (!previousHistorylist.includes(currentCity)) {
+//         previousHistorylist.push(currentCity);
+//         var pastCity = $(
+//             `<li>${currentCity}</li>`
+//             );
+//             $(".previousHistory").append(pastCity);
+//         };
+//         localStorage.setItem(currentCity, JSON.stringify(previousHistorylist));
+//     })
