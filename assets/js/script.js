@@ -8,7 +8,7 @@ var apiCall = `https://api.openweathermap.org/data/2.5`;
 
 const displayWeather = (data) => {
     const currentweatherContainer = document.createElement('div');
-    console.log(data);
+    // console.log(data);
     currentweatherContainer.textContent = data.list[0].main.temp;
     document.body.appendChild(currentweatherContainer);
 };
@@ -49,18 +49,18 @@ searchForm.addEventListener("click", handleSearchSubmit);
 
 // console.log(getcurrentweather())
 
-// $("#searchBtn").on("click",function(event) {
-//     console.log(event);
-//     event.preventDefault();
+$("#searchBtn").on("click",function(event) {
+    console.log(event);
+    event.preventDefault();
     
-//     var currentCity = $("#citySearch").val().trim();
-//     console.log(currentCity);
-//     if (!previousHistorylist.includes(currentCity)) {
-//         previousHistorylist.push(currentCity);
-//         var pastCity = $(
-//             `<li>${currentCity}</li>`
-//             );
-//             $(".previousHistory").append(pastCity);
-//         };
-//         localStorage.setItem(currentCity, JSON.stringify(previousHistorylist));
-//     })
+    var currentCity = $("#searchedCity").val().trim();
+    console.log(currentCity);
+    if (!previousHistorylist.includes(currentCity)) {
+        previousHistorylist.push(currentCity);
+        var pastCity = $(
+            `<li>${currentCity}</li>`
+            );
+            $(".previousHistory").append(pastCity);
+        };
+        localStorage.setItem(currentCity, JSON.stringify(previousHistorylist));
+    })
