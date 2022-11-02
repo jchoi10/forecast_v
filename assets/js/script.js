@@ -6,17 +6,18 @@ var APIkey = "c5983aad19183fb683432bc8f6baf7fc"
 var previousHistorylist = [];
 var apiCall = `https://api.openweathermap.org/data/2.5`;
 
+//append data on page
 const displayWeather = (data) => {
-    const currentweatherContainer = document.createElement('div');
+    const currentTemp = document.createElement('div');
     // console.log(data);
-    currentweatherContainer.textContent = data.list[0].main.temp;
-    document.body.appendChild(currentweatherContainer);
+    currentTemp.textContent = data.list[0].main.temp + " °F";
+    // document.body.appendChild(currentweatherContainer);
+    $(".latestCity").append(currentTemp);
 };
 
 
-
+// get information from API
 var getcurrentweather = (city) => {
-    
     
     fetch(`${apiCall}/forecast?q=${city}&appid=${APIkey}`)
     .then(function(res){
@@ -28,7 +29,7 @@ var getcurrentweather = (city) => {
     })
     .then((data) => {
         displayWeather(data);
-        // console.log(data);
+        console.log(data);
         return data
     }).catch((err) => console.error(err))
 
@@ -43,6 +44,7 @@ const handleSearchSubmit= (event) => {
 
     getcurrentweather(searchForm.children[0].value);
 }
+
 
 searchForm.addEventListener("click", handleSearchSubmit);
 
@@ -63,4 +65,4 @@ $("#searchBtn").on("click",function(event) {
             $(".previousHistory").append(pastCity);
         };
         localStorage.setItem(currentCity, JSON.stringify(previousHistorylist));
-    })
+    });
