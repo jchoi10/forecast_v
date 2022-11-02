@@ -9,26 +9,29 @@ var apiCall = `https://api.openweathermap.org/data/2.5`;
 const displayWeather = (data) => {
     const currentweatherContainer = document.createElement('div');
     console.log(data);
-    currentweatherContainer.textContent = data.toString();
+    currentweatherContainer.textContent = data.list[0].main.temp;
     document.body.appendChild(currentweatherContainer);
-}
+};
 
-// https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+
 
 var getcurrentweather = (city) => {
     
     
     fetch(`${apiCall}/forecast?q=${city}&appid=${APIkey}`)
     .then(function(res){
-        console.log(res)
+        // console.log(res)
         if (!res.ok){
             console.error("response not ok")
         }
         return res.json()
     })
     .then((data) => {
+        displayWeather(data);
+        // console.log(data);
         return data
     }).catch((err) => console.error(err))
+
 };
 
 
