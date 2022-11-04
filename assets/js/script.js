@@ -85,3 +85,7 @@ $("#searchBtn").on("click",function(event) {
         localStorage.setItem(currentCity, JSON.stringify(previousHistorylist));
 });
 
+$(document).on("click","#previousHistory-item", function() {
+    var cityList = $(this).text();
+    displayWeather(cityList);
+});
