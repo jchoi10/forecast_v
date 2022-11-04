@@ -1,6 +1,6 @@
 # forecast_v
 
-- Below shows the demo video of the profile makerX project.
+- Below shows the demo video of the Forecast_V project.
 
 
 ## Demo Video Google Drive Link
