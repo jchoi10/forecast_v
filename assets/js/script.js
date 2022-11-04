@@ -8,11 +8,28 @@ var apiCall = `https://api.openweathermap.org/data/2.5`;
 
 //append data on page
 const displayWeather = (data) => {
+    $(".latestCity").empty();
+    $(".currentSearchedCity").empty(); 
+
+    const currentCityName = document.createElement('h3');
+    currentCityName.textContent = data.city.name;
+    $(".currentSearchedCity").append(currentCityName);
+
+    const currentIcon = document.createElement('img');
+    currentIcon.setAttribute("src", "https://openweathermap.org/img/wn/" + data.list[0].weather[0].icon + "@2x.png")
+    $(".latestCity").append(currentIcon);
+    
     const currentTemp = document.createElement('div');
-    // console.log(data);
-    currentTemp.textContent = data.list[0].main.temp + " °F";
-    // document.body.appendChild(currentweatherContainer);
+    currentTemp.textContent = "Temperature: " + data.list[0].main.temp + " °F";
     $(".latestCity").append(currentTemp);
+    
+    const currentHumidity = document.createElement('p');
+    currentHumidity.textContent = "Humidity: " + data.list[0].main.humidity;
+    $(".latestCity").append(currentHumidity);
+
+    const currentWindSpeed = document.createElement("p");
+    currentWindSpeed.textContent = "Wind Speed: " + data.list[0].wind.speed;
+    $(".latestCity").append(currentWindSpeed);
 };
 
 
@@ -30,6 +47,7 @@ var getcurrentweather = (city) => {
     .then((data) => {
         displayWeather(data);
         console.log(data);
+
         return data
     }).catch((err) => console.error(err))
 
@@ -65,4 +83,5 @@ $("#searchBtn").on("click",function(event) {
             $(".previousHistory").append(pastCity);
         };
         localStorage.setItem(currentCity, JSON.stringify(previousHistorylist));
-    });
+});
+
